@@ -1,61 +1,416 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nationwide Bank</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nationwide Bank | Account Portal</title>
 <style>
-body{font-family:Arial;margin:0;background:#eef3f8}
-.login{display:flex;justify-content:center;align-items:center;height:100vh}
-.box{background:#fff;padding:30px;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.1)}
-input{display:block;margin:10px 0;padding:10px;width:250px}
-button{padding:10px;width:100%;background:#0f5ca8;color:#fff;border:none}
-#error{color:red;display:none}
-.dashboard{display:none;padding:30px}
-.balance{background:#0f5ca8;color:#fff;padding:20px;border-radius:10px;margin-bottom:20px}
-.details{background:#fff;padding:20px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Arial,Helvetica,sans-serif;
+  background:#eef3f8;
+  color:#172033;
+}
+.login-page{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:25px;
+  background:linear-gradient(135deg,#062b63,#0f5ca8 55%,#e9f3ff 55%);
+}
+.login-card{
+  width:100%;
+  max-width:430px;
+  background:#fff;
+  padding:34px;
+  border-radius:22px;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+.logo{
+  font-size:28px;
+  font-weight:900;
+  color:#062b63;
+  margin-bottom:5px;
+}
+.subtitle{
+  color:#687386;
+  margin-bottom:25px;
+}
+label{
+  display:block;
+  font-size:14px;
+  font-weight:700;
+  margin:14px 0 7px;
+}
+input,select{
+  width:100%;
+  padding:14px;
+  border:1px solid #ccd8e6;
+  border-radius:12px;
+  font-size:15px;
+}
+button{
+  border:0;
+  border-radius:12px;
+  padding:14px;
+  font-weight:800;
+  cursor:pointer;
+  background:#0f5ca8;
+  color:#fff;
+  font-size:15px;
+}
+.full-btn{width:100%;margin-top:20px}
+button:hover{background:#083e7a}
+.error{
+  display:none;
+  color:#b00020;
+  font-weight:700;
+  margin-top:13px;
+}
+.training-note{
+  margin-top:18px;
+  padding:12px;
+  background:#fff7dc;
+  border-left:5px solid #d69b00;
+  border-radius:10px;
+  color:#604400;
+  font-size:13px;
+  line-height:1.45;
+}
+.app{display:none;min-height:100vh}
+.sidebar{
+  position:fixed;
+  left:0;top:0;bottom:0;
+  width:250px;
+  background:#062b63;
+  color:white;
+  padding:25px 20px;
+}
+.sidebar h2{margin:0;font-size:24px}
+.sidebar small{opacity:.8}
+.nav{
+  margin-top:35px;
+}
+.nav a{
+  display:block;
+  color:white;
+  text-decoration:none;
+  padding:13px 12px;
+  border-radius:12px;
+  margin-bottom:8px;
+  font-weight:700;
+}
+.nav a:hover,.nav a.active{background:rgba(255,255,255,.15)}
+.logout{
+  position:absolute;
+  left:20px;
+  right:20px;
+  bottom:25px;
+  background:#d9534f;
+}
+.main{
+  margin-left:250px;
+  padding:28px;
+}
+.topbar{
+  background:white;
+  padding:20px;
+  border-radius:20px;
+  box-shadow:0 8px 25px rgba(8,40,90,.08);
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  flex-wrap:wrap;
+}
+.topbar h1{margin:0;color:#062b63;font-size:26px}
+.badge{
+  background:#e9f7ef;
+  color:#137333;
+  padding:8px 12px;
+  border-radius:20px;
+  font-weight:800;
+  font-size:13px;
+}
+.grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:22px;
+  margin-top:22px;
+}
+.card{
+  background:white;
+  border-radius:20px;
+  padding:23px;
+  box-shadow:0 8px 25px rgba(8,40,90,.08);
+}
+.balance-card{
+  background:linear-gradient(135deg,#062b63,#0f5ca8);
+  color:white;
+  border-radius:22px;
+  padding:28px;
+  min-height:220px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.balance-card small{opacity:.85}
+.balance-card h2{
+  font-size:43px;
+  margin:10px 0;
+}
+.account-row{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:12px;
+  margin-top:18px;
+}
+.info-box{
+  background:#f6f9fd;
+  padding:16px;
+  border-radius:14px;
+}
+.info-box small{color:#6a7483}
+.info-box strong{display:block;margin-top:5px;color:#172033}
+.actions{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.action-btn{
+  background:#f1f6ff;
+  color:#0f5ca8;
+  padding:16px;
+  border-radius:16px;
+  text-align:center;
+  font-weight:900;
+}
+table{
+  width:100%;
+  border-collapse:collapse;
+  margin-top:12px;
+}
+th,td{
+  padding:14px;
+  text-align:left;
+  border-bottom:1px solid #e7edf5;
+  font-size:14px;
+}
+th{color:#062b63;background:#f7faff}
+.credit{color:#137333;font-weight:800}
+.debit{color:#b00020;font-weight:800}
+.transfer-form{
+  display:grid;
+  gap:12px;
+}
+.success{
+  display:none;
+  margin-top:15px;
+  background:#e9f7ef;
+  color:#137333;
+  padding:13px;
+  border-radius:12px;
+  font-weight:800;
+}
+.notice-line{
+  margin-top:22px;
+  background:#fff7dc;
+  color:#604400;
+  border-left:5px solid #d69b00;
+  padding:14px;
+  border-radius:12px;
+  font-size:13px;
+}
+.footer{
+  text-align:center;
+  color:#6a7483;
+  font-size:13px;
+  margin:25px 0 10px;
+}
+@media(max-width:900px){
+  .sidebar{
+    position:static;
+    width:100%;
+    border-radius:0 0 20px 20px;
+  }
+  .logout{position:static;width:100%;margin-top:18px}
+  .main{margin-left:0;padding:18px}
+  .grid{grid-template-columns:1fr}
+  .account-row{grid-template-columns:1fr}
+  .actions{grid-template-columns:1fr}
+  .balance-card h2{font-size:34px}
+  th,td{font-size:12px;padding:10px}
+}
 </style>
 </head>
 <body>
 
-<div class="login" id="login">
-<div class="box">
-<h2>Login</h2>
-<input id="user" placeholder="Username">
-<input id="pass" type="password" placeholder="Password">
-<button onclick="login()">Login</button>
-<p id="error">Wrong login</p>
-</div>
-</div>
+<section class="login-page" id="loginPage">
+  <div class="login-card">
+    <div class="logo">Nationwide Bank</div>
+    <div class="subtitle">Secure Account Portal</div>
 
-<div class="dashboard" id="dash">
-<h2>Dashboard</h2>
+    <label>Username</label>
+    <input id="username" type="text" placeholder="Enter username" />
 
-<div class="balance">
-<h3>Available Balance</h3>
-<h1>$9,000,000.00</h1>
-</div>
+    <label>Password</label>
+    <input id="password" type="password" placeholder="Enter password" />
 
-<div class="details">
-<h3>Account Details</h3>
-<p><strong>Account Name:</strong> Marry Muller</p>
-<p><strong>Account Number:</strong> **** 4821</p>
-<p><strong>Status:</strong> Active</p>
-</div>
+    <button class="full-btn" onclick="login()">Sign In</button>
+    <div class="error" id="errorMsg">Incorrect username or password.</div>
 
-</div>
+    <div class="training-note">
+      Training Simulation Platform — do not enter real banking passwords, card numbers, or private financial information.
+    </div>
+  </div>
+</section>
+
+<section class="app" id="app">
+  <aside class="sidebar">
+    <h2>Nationwide Bank</h2>
+    <small>Training Simulation Platform</small>
+    <div class="nav">
+      <a href="#dashboard" class="active">Dashboard</a>
+      <a href="#account">Account Details</a>
+      <a href="#transactions">Transactions</a>
+      <a href="#transfer">Transfer</a>
+    </div>
+    <button class="logout" onclick="logout()">Log Out</button>
+  </aside>
+
+  <main class="main">
+    <div class="topbar" id="dashboard">
+      <div>
+        <h1>Welcome back, Marry Muller</h1>
+        <p style="margin:6px 0 0;color:#6a7483;">Account overview and banking tools</p>
+      </div>
+      <span class="badge">Account Active</span>
+    </div>
+
+    <div class="grid">
+      <div class="balance-card">
+        <div>
+          <small>Available Balance</small>
+          <h2>$9,000,000.00</h2>
+          <p>Checking Account • **** 4821</p>
+        </div>
+        <p style="margin:0;opacity:.9;">Last login: April 28, 2026</p>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-top:0;color:#062b63;">Quick Actions</h3>
+        <div class="actions">
+          <div class="action-btn">Transfer</div>
+          <div class="action-btn">Deposit</div>
+          <div class="action-btn">Statement</div>
+        </div>
+        <div class="notice-line">
+          This page is for teaching and design practice only. No real money movement happens here.
+        </div>
+      </div>
+    </div>
+
+    <div class="card" id="account" style="margin-top:22px;">
+      <h3 style="color:#062b63;margin-top:0;">Account Details</h3>
+      <div class="account-row">
+        <div class="info-box"><small>Account Name</small><strong>Marry Muller</strong></div>
+        <div class="info-box"><small>Username</small><strong>Marryluller122</strong></div>
+        <div class="info-box"><small>Account Number</small><strong>**** 4821</strong></div>
+        <div class="info-box"><small>Account Type</small><strong>Checking Account</strong></div>
+        <div class="info-box"><small>Status</small><strong>Active</strong></div>
+        <div class="info-box"><small>Currency</small><strong>USD</strong></div>
+      </div>
+    </div>
+
+    <div class="card" id="transactions" style="margin-top:22px;">
+      <h3 style="color:#062b63;margin-top:0;">Recent Transactions</h3>
+      <table>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+        <tr>
+          <td>Apr 28, 2026</td>
+          <td>International Asset Deposit</td>
+          <td class="credit">Credit</td>
+          <td>$5,000,000.00</td>
+          <td>Completed</td>
+        </tr>
+        <tr>
+          <td>Apr 25, 2026</td>
+          <td>Trust Account Funding</td>
+          <td class="credit">Credit</td>
+          <td>$4,000,000.00</td>
+          <td>Completed</td>
+        </tr>
+        <tr>
+          <td>Apr 22, 2026</td>
+          <td>Account Maintenance</td>
+          <td class="debit">Debit</td>
+          <td>$0.00</td>
+          <td>Posted</td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="card" id="transfer" style="margin-top:22px;">
+      <h3 style="color:#062b63;margin-top:0;">Transfer Funds</h3>
+      <div class="transfer-form">
+        <label>Recipient Name</label>
+        <input type="text" placeholder="Enter recipient name" />
+        <label>Recipient Account</label>
+        <input type="text" placeholder="Enter account number" />
+        <label>Amount</label>
+        <input type="number" placeholder="Enter amount" />
+        <label>Transfer Type</label>
+        <select>
+          <option>Internal Transfer</option>
+          <option>Domestic Transfer</option>
+          <option>International Transfer</option>
+        </select>
+        <button onclick="showSuccess()">Continue Transfer</button>
+      </div>
+      <div class="success" id="successMsg">Transfer request submitted in training simulation. No real transfer was made.</div>
+    </div>
+
+    <div class="footer">
+      © 2026 Nationwide Bank — Training Simulation Platform
+    </div>
+  </main>
+</section>
 
 <script>
-function login(){
-let u=document.getElementById('user').value;
-let p=document.getElementById('pass').value;
+const correctUsername = "Marryluller122";
+const correctPassword = "Muller$forme";
 
-if(u==="Marryluller122" && p==="Muller$forme"){
-document.getElementById('login').style.display="none";
-document.getElementById('dash').style.display="block";
-}else{
-document.getElementById('error').style.display="block";
+function login(){
+  const u = document.getElementById("username").value.trim();
+  const p = document.getElementById("password").value;
+
+  if(u === correctUsername && p === correctPassword){
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("app").style.display = "block";
+    document.getElementById("errorMsg").style.display = "none";
+    window.scrollTo(0,0);
+  }else{
+    document.getElementById("errorMsg").style.display = "block";
+  }
 }
+
+function logout(){
+  document.getElementById("app").style.display = "none";
+  document.getElementById("loginPage").style.display = "flex";
+  document.getElementById("password").value = "";
+  window.scrollTo(0,0);
+}
+
+function showSuccess(){
+  document.getElementById("successMsg").style.display = "block";
 }
 </script>
 
