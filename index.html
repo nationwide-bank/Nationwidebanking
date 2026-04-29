@@ -1,283 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Nationwide Bank</title>
-  <style>
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      background:#eef3f8;
-      color:#1b2430;
-    }
-    header{
-      background:linear-gradient(135deg,#062b63,#0f5ca8);
-      color:white;
-      padding:20px 6%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      flex-wrap:wrap;
-    }
-    .brand{font-size:26px;font-weight:800}
-    .tag{font-size:13px;opacity:.9;margin-top:4px}
-    nav a{color:white;text-decoration:none;margin-left:20px;font-weight:600;font-size:14px}
-    .login-page{
-      min-height:calc(100vh - 84px);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:30px;
-      background:linear-gradient(135deg,#eaf3ff,#ffffff);
-    }
-    .login-card{
-      width:100%;
-      max-width:420px;
-      background:white;
-      border-radius:22px;
-      box-shadow:0 18px 45px rgba(8,40,90,.18);
-      padding:32px;
-    }
-    .login-card h1{color:#062b63;margin:0 0 8px}
-    .login-card p{color:#5d6b7a;margin-bottom:25px;line-height:1.5}
-    label{display:block;margin:14px 0 7px;font-weight:700;font-size:14px}
-    input{
-      width:100%;
-      padding:14px;
-      border:1px solid #cdd9e6;
-      border-radius:11px;
-      font-size:15px;
-    }
-    button{
-      width:100%;
-      padding:14px;
-      margin-top:20px;
-      border:none;
-      border-radius:11px;
-      background:#0f5ca8;
-      color:white;
-      font-weight:800;
-      font-size:15px;
-      cursor:pointer;
-    }
-    button:hover{background:#083d78}
-    .error{display:none;color:#b00020;margin-top:14px;font-weight:700;font-size:14px}
-    .notice{
-      background:#fff8df;
-      border-left:5px solid #d59b00;
-      padding:12px 15px;
-      border-radius:8px;
-      margin-top:20px;
-      font-size:13px;
-      color:#5c4300;
-    }
-    .main-site{display:none}
-    .hero{
-      background:linear-gradient(135deg,#ffffff,#dcecff);
-      padding:55px 6%;
-    }
-    .hero h1{font-size:40px;color:#062b63;margin:0 0 14px}
-    .hero p{font-size:17px;line-height:1.6;max-width:760px}
-    .section{padding:42px 6%}
-    .section h2{color:#062b63;text-align:center;margin-bottom:25px}
-    .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-    .card,.dashboard{
-      background:white;
-      border-radius:18px;
-      box-shadow:0 12px 30px rgba(8,40,90,.12);
-    }
-    .card{padding:25px;text-align:center}
-    .card h3{color:#0f5ca8}
-    .dashboard{margin:35px 6%;padding:28px}
-    .dash-top{
-      display:flex;
-      justify-content:space-between;
-      gap:15px;
-      flex-wrap:wrap;
-      align-items:center;
-      border-bottom:1px solid #e0e7f0;
-      padding-bottom:18px;
-    }
-    .logout{
-      width:auto;
-      padding:10px 16px;
-      margin-top:0;
-      background:#6b7280;
-    }
-    .balance{
-      background:linear-gradient(135deg,#062b63,#0f5ca8);
-      color:white;
-      border-radius:18px;
-      padding:25px;
-      margin:25px 0;
-    }
-    .balance small{opacity:.85}
-    .balance h1{font-size:38px;margin:8px 0 0}
-    table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden}
-    th,td{padding:14px;text-align:left;border-bottom:1px solid #e8edf3;font-size:14px}
-    th{background:#f4f7fb;color:#062b63}
-    .transfer-box{margin-top:25px;padding:22px;background:#f7fbff;border-radius:15px}
-    footer{background:#062b63;color:white;text-align:center;padding:20px;margin-top:40px;font-size:14px}
-    @media(max-width:850px){
-      .cards{grid-template-columns:1fr}
-      .hero h1{font-size:31px}
-      nav{margin-top:12px}
-      nav a{margin:0 10px 0 0}
-      th,td{font-size:12px;padding:10px}
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nationwide Bank</title>
+<style>
+body{font-family:Arial;margin:0;background:#eef3f8}
+.login{display:flex;justify-content:center;align-items:center;height:100vh}
+.box{background:#fff;padding:30px;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.1)}
+input{display:block;margin:10px 0;padding:10px;width:250px}
+button{padding:10px;width:100%;background:#0f5ca8;color:#fff;border:none}
+#error{color:red;display:none}
+.dashboard{display:none;padding:30px}
+.balance{background:#0f5ca8;color:#fff;padding:20px;border-radius:10px}
+</style>
 </head>
 <body>
 
-<header>
-  <div>
-    <div class="brand">Nationwide Bank</div>
-    <div class="tag">Training Simulation Platform</div>
-  </div>
-  <nav>
-    <a href="#services">Services</a>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
+<div class="login" id="login">
+<div class="box">
+<h2>Login</h2>
+<input id="user" placeholder="Username">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+<p id="error">Wrong login</p>
+</div>
+</div>
 
-<section class="login-page" id="loginPage">
-  <div class="login-card">
-    <h1>Online Banking Login</h1>
-    <p>Sign in to access the banking training dashboard.</p>
-
-    <label>Username</label>
-    <input type="text" id="username" placeholder="Enter username">
-
-    <label>Password</label>
-    <input type="password" id="password" placeholder="Enter password">
-
-    <button onclick="login()">Sign In</button>
-    <div class="error" id="errorMsg">Incorrect username or password.</div>
-
-    <div class="notice">
-      Training Simulation Platform — do not enter real banking passwords, card numbers, or private financial information.
-    </div>
-  </div>
-</section>
-
-<main class="main-site" id="mainSite">
-  <section class="hero">
-    <h1>Welcome to Nationwide Bank</h1>
-    <p>
-      This banking interface is built for teaching, classroom practice, website design training,
-      and financial technology demonstrations.
-    </p>
-  </section>
-
-  <section class="section" id="services">
-    <h2>Banking Services</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>Online Banking</h3>
-        <p>View balances, account activity, and banking tools from one place.</p>
-      </div>
-      <div class="card">
-        <h3>Personal Loans</h3>
-        <p>Explore flexible lending options with simple account management.</p>
-      </div>
-      <div class="card">
-        <h3>Transfers</h3>
-        <p>Practice transfer forms and transaction layouts in a safe training space.</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="dashboard" id="dashboard">
-    <div class="dash-top">
-      <div>
-        <h2>Account Dashboard</h2>
-        <p>Welcome back, Marryluller122</p>
-      </div>
-      <button class="logout" onclick="logout()">Log Out</button>
-    </div>
-
-    <div class="balance">
-      <small>Available Balance</small>
-      <h1>$25,480.75</h1>
-      <p>Checking Account • **** 4821</p>
-    </div>
-
-    <h3>Recent Transactions</h3>
-    <table>
-      <tr>
-        <th>Date</th>
-        <th>Description</th>
-        <th>Type</th>
-        <th>Amount</th>
-      </tr>
-      <tr>
-        <td>Apr 28, 2026</td>
-        <td>Account Deposit</td>
-        <td>Credit</td>
-        <td>$3,200.00</td>
-      </tr>
-      <tr>
-        <td>Apr 26, 2026</td>
-        <td>Utility Payment</td>
-        <td>Debit</td>
-        <td>$145.30</td>
-      </tr>
-      <tr>
-        <td>Apr 24, 2026</td>
-        <td>Transfer Received</td>
-        <td>Credit</td>
-        <td>$980.00</td>
-      </tr>
-    </table>
-
-    <div class="transfer-box">
-      <h3>Transfer Funds</h3>
-      <label>Recipient</label>
-      <input type="text" placeholder="Recipient name">
-      <label>Amount</label>
-      <input type="number" placeholder="Amount">
-      <button onclick="alert('Training simulation only. No real transfer was made.')">Continue Transfer</button>
-    </div>
-  </section>
-
-  <section class="section" id="contact">
-    <h2>Contact</h2>
-    <p style="text-align:center;">Email: support@nationwidebank.example</p>
-    <p style="text-align:center;">Phone: +1 (000) 000-0000</p>
-  </section>
-
-  <footer>
-    © 2026 Nationwide Bank — Training Simulation Platform
-  </footer>
-</main>
+<div class="dashboard" id="dash">
+<h2>Dashboard</h2>
+<div class="balance">
+<h3>Balance</h3>
+<h1>$9,000,000.00</h1>
+</div>
+</div>
 
 <script>
-  const correctUsername = "Marryluller122";
-  const correctPassword = "Muller$forme";
+function login(){
+let u=document.getElementById('user').value;
+let p=document.getElementById('pass').value;
 
-  function login(){
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value;
-
-    if(username === correctUsername && password === correctPassword){
-      document.getElementById("loginPage").style.display = "none";
-      document.getElementById("mainSite").style.display = "block";
-      document.getElementById("errorMsg").style.display = "none";
-      window.scrollTo(0,0);
-    } else {
-      document.getElementById("errorMsg").style.display = "block";
-    }
-  }
-
-  function logout(){
-    document.getElementById("mainSite").style.display = "none";
-    document.getElementById("loginPage").style.display = "flex";
-    document.getElementById("password").value = "";
-    window.scrollTo(0,0);
-  }
+if(u==="Marryluller122" && p==="Muller$forme"){
+document.getElementById('login').style.display="none";
+document.getElementById('dash').style.display="block";
+}else{
+document.getElementById('error').style.display="block";
+}
+}
 </script>
 
 </body>
