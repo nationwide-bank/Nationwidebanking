@@ -12,7 +12,8 @@ input{display:block;margin:10px 0;padding:10px;width:250px}
 button{padding:10px;width:100%;background:#0f5ca8;color:#fff;border:none}
 #error{color:red;display:none}
 .dashboard{display:none;padding:30px}
-.balance{background:#0f5ca8;color:#fff;padding:20px;border-radius:10px}
+.balance{background:#0f5ca8;color:#fff;padding:20px;border-radius:10px;margin-bottom:20px}
+.details{background:#fff;padding:20px;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.1)}
 </style>
 </head>
 <body>
@@ -29,10 +30,19 @@ button{padding:10px;width:100%;background:#0f5ca8;color:#fff;border:none}
 
 <div class="dashboard" id="dash">
 <h2>Dashboard</h2>
+
 <div class="balance">
-<h3>Balance</h3>
+<h3>Available Balance</h3>
 <h1>$9,000,000.00</h1>
 </div>
+
+<div class="details">
+<h3>Account Details</h3>
+<p><strong>Account Name:</strong> Marry Muller</p>
+<p><strong>Account Number:</strong> **** 4821</p>
+<p><strong>Status:</strong> Active</p>
+</div>
+
 </div>
 
 <script>
